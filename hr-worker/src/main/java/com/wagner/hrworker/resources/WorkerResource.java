@@ -21,26 +21,33 @@ import com.wagner.hrworker.repositories.WorkerRepository;
 public class WorkerResource {
 
 	private static Logger logger = LoggerFactory.getLogger(WorkerResource.class);
-	
+
 	@Autowired
 	private Environment env;
-	
+
 	@Autowired
 	private WorkerRepository repository;
 
 	@GetMapping
 	public ResponseEntity<List<Worker>> findaAll() {
-		
+
 		List<Worker> list = repository.findAll();
 
 		return ResponseEntity.ok(list);
 	}
-	
+
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Worker> findaAById(@PathVariable Long id) {
-		
-		logger.info("PORT = "+ env.getProperty("local.server.port"));
-		
+
+//		try {
+//			Thread.sleep(3000L);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+		logger.info("PORT = " + env.getProperty("local.server.port"));
+
 		Worker obj = repository.findById(id).get();
 
 		return ResponseEntity.ok(obj);
